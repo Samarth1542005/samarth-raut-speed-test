@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internet Speed Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000;
+            background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0);
+            background-size: 25px 25px;
+        }
+        .text-glow { text-shadow: 0 0 8px currentColor; }
+        .container-glow { box-shadow: 0 0 25px rgba(8, 217, 214, 0.3); }
+        .button-glow { box-shadow: 0 0 15px rgba(8, 217, 214, 0.4); }
+        .button-glow:hover { box-shadow: 0 0 25px rgba(8, 217, 214, 0.7); }
+        .gauge-container { width: 300px; height: 150px; overflow: hidden; position: relative; }
+        .gauge-bg { width: 300px; height: 300px; border-radius: 50%; border: 25px solid #1f2937; box-sizing: border-box; position: absolute; top: 0; left: 0; }
+        .gauge-needle { width: 4px; height: 120px; background-color: #08d9d6; border-radius: 2px; position: absolute; bottom: 30px; left: 50%; transform-origin: bottom; transform: translateX(-50%) rotate(-90deg); transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 0 10px #08d9d6; }
+        .gauge-center { width: 20px; height: 20px; background-color: #08d9d6; border: 2px solid #000; border-radius: 50%; position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); box-shadow: 0 0 10px #08d9d6; }
+        .result-item.testing { background-color: rgba(8, 217, 214, 0.1); border-color: rgba(8, 217, 214, 0.3); }
+        .result-item.testing p:first-child { color: #08d9d6; }
+    </style>
+</head>
+<body class="bg-black text-white flex items-center justify-center min-h-screen p-4">
+
+    <div class="w-full max-w-4xl mx-auto p-6 md:p-8 bg-gray-900/50 backdrop-blur-sm border border-cyan-500/30 rounded-2xl shadow-2xl container-glow">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-cyan-400 text-glow">Internet Speed Test</h1>
+        </header>
+
+        <main class="grid md:grid-cols-2 gap-8 items-center">
+            <div class="flex flex-col items-center justify-center space-y-6">
+                <div class="gauge-container">
+                    <div class="gauge-bg"></div>
+                    <div class="gauge-needle" id="needle"></div>
+                    <div class="gauge-center"></div>
+                </div>
+                <div class="text-center">
+                    <div id="speedDisplay" class="text-5xl font-bold text-white transition-all duration-300">0.00</div>
+                    <div class="text-lg text-cyan-400">Mbps</div>
+                    <p id="statusText" class="text-gray-400 h-6 mt-2 transition-colors duration-300"></p>
+                </div>
+                <button id="startButton" class="bg-cyan-500 hover:bg-cyan-400 text-black font-bold py-3 px-10 rounded-full transition-all duration-300 transform hover:scale-105 disabled:bg-gray-700 disabled:text-gray-400 disabled:cursor-not-allowed disabled:scale-100 button-glow">
+                    Start Test
+                </button>
+            </div>
+
+            <div class="w-full space-y-4">
+                <div id="pingBox" class="result-item flex justify-between items-baseline p-4 bg-gray-800/50 rounded-lg border border-gray-700 transition-all duration-300">
+                    <p class="text-md text-gray-300">Ping</p>
+                    <p id="pingResult" class="text-2xl font-semibold text-cyan-300">- ms</p>
+                </div>
+                <div id="jitterBox" class="result-item flex justify-between items-baseline p-4 bg-gray-800/50 rounded-lg border border-gray-700 transition-all duration-300">
+                    <p class="text-md text-gray-300">Jitter</p>
+                    <p id="jitterResult" class="text-2xl font-semibold text-cyan-300">- ms</p>
+                </div>
+                <div id="downloadBox" class="result-item flex justify-between items-baseline p-4 bg-gray-800/50 rounded-lg border border-gray-700 transition-all duration-300">
+                    <p class="text-md text-gray-300">Download</p>
+                    <p id="downloadResult" class="text-2xl font-semibold text-cyan-300">- Mbps</p>
+                </div>
+                <div class="text-center pt-4 text-gray-500 text-sm" id="ispInfo">
+                    Your ISP will be displayed here.
+                </div>
+            </div>
+        </main>
+        
+        <footer class="text-center text-gray-500 text-sm mt-10 pt-6 border-t border-gray-700">
+            <p class="font-semibold">Developed by Samarth Raut</p>
+            <p>Pune Institute of Computer Technology</p>
+            <div class="mt-2 space-x-4">
+                <a href="mailto:rautsamarth282@gmail.com" class="hover:text-cyan-400 transition-colors">Email</a>
+                <span>&middot;</span>
+                <a href="https://www.linkedin.com/in/samarth-raut-028835281" class="hover:text-cyan-400 transition-colors">LinkedIn</a>
+                <span>&middot;</span>
+                <a href="https://github.com/Samarth1542005" class="hover:text-cyan-400 transition-colors">GitHub</a>
+            </div>
+        </footer>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
